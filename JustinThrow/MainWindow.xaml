@@ -1,7 +1,7 @@
 ﻿<Window x:Class="JustinThrow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="480" Width="853" Name="mainWin" >
+        Title="MainWindow" Height="480" Width="853" Name="mainWin" Loaded="mainWin_Loaded">
     <!--<Window.Resources>
         <Storyboard x:Key="part1_avi">
             <MediaTimeline BeginTime="00:00:00" Source="part1.avi" Storyboard.TargetName="part1_avi" />
