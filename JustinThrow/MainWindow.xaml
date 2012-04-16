@@ -1,7 +1,7 @@
 ﻿<Window x:Class="JustinThrow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="480" Width="853" Name="mainWin" Loaded="mainWin_Loaded">
+        Title="MainWindow" Height="600" Width="853" Name="mainWin" Loaded="mainWin_Loaded">
     <!--<Window.Resources>
         <Storyboard x:Key="part1_avi">
             <MediaTimeline BeginTime="00:00:00" Source="part1.avi" Storyboard.TargetName="part1_avi" />
@@ -27,7 +27,7 @@
         </EventTrigger>
     </Window.Triggers>-->
     <Window.CommandBindings>
-        <CommandBinding Command="MediaCommands.Play" Executed="Window_PreviewKeyDown"/>
+        <CommandBinding Command="MediaCommands.Play" Executed="MediaCommandsPlayExecute"/>
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Key="D1" Command="MediaCommands.Play" CommandParameter="1"/>
@@ -35,9 +35,25 @@
         <KeyBinding Key="D3" Command="MediaCommands.Play" CommandParameter="3"/>
     </Window.InputBindings>
     
+    <StackPanel Orientation="Vertical" >
+        
+    
     <Grid x:Name="LayoutRoot">
         <MediaElement Source="part1.avi" x:Name="part1_avi" Margin="0,0,0,0" Stretch="Fill" LoadedBehavior="Manual" />
         <MediaElement Source="part2.avi" x:Name="part2_avi" Margin="0,0,0,0" Stretch="Fill" LoadedBehavior="Manual"/>
     </Grid>
+        <ListBox x:Name="detectedGestures" FontSize="20" Grid.Column="1" Margin="10" Grid.Row="3"/>
+        <ListBox x:Name="stabilitiesList" FontSize="20" Grid.Column="1" Grid.Row="5" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Key}"/>
+                        <TextBlock Text=": "/>
+                        <TextBlock Text="{Binding Value}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
 
 </Window>

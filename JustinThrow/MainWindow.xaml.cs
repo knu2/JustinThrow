@@ -37,6 +37,7 @@ namespace JustinThrow
         string letterT_KBPath;
 
         BindableNUICamera nuiCamera;
+        SkeletonRecorder recorder;
 
         public MainWindow()
         {
@@ -44,14 +45,14 @@ namespace JustinThrow
         }
 
         
-        private void Window_PreviewKeyDown(object sender, ExecutedRoutedEventArgs e)
+        private void MediaCommandsPlayExecute(object sender, ExecutedRoutedEventArgs e)
         {
             switch (e.Parameter as string)
             {
                 case "1":
                     part2_avi.Stop();
                     part2_avi.Visibility = Visibility.Hidden;
-
+                    part1_avi.Stop();
                     part1_avi.Visibility = Visibility.Visible;
                     part1_avi.Position = TimeSpan.Zero;
                     part1_avi.Play();
@@ -59,7 +60,7 @@ namespace JustinThrow
                 case "2":
                     part1_avi.Stop();
                     part1_avi.Visibility = Visibility.Hidden;
-
+                    part2_avi.Stop();
                     part2_avi.Visibility = Visibility.Visible;
                     part2_avi.Position = TimeSpan.Zero;
                     part2_avi.Play();
@@ -185,8 +186,8 @@ namespace JustinThrow
             if (e.SkeletonFrame == null)
                 return;
 
-            //if (recorder != null)
-            //    recorder.Record(e.SkeletonFrame);
+            if (recorder != null)
+                recorder.Record(e.SkeletonFrame);
 
             if (e.SkeletonFrame.Skeletons.Where(s => s.TrackingState != SkeletonTrackingState.NotTracked).Count() == 0)
                 return;
@@ -232,7 +233,7 @@ namespace JustinThrow
 
             //skeletonDisplayManager.Draw(frame);
 
-            //stabilitiesList.ItemsSource = stabilities;
+            stabilitiesList.ItemsSource = stabilities;
 
             //currentPosture.Text = "Current posture: " + algorithmicPostureRecognizer.CurrentPosture;
         }
@@ -252,11 +253,11 @@ namespace JustinThrow
             //    voiceCommander = null;
             //}
 
-            //if (recorder != null)
-            //{
-            //    recorder.Stop();
-            //    recorder = null;
-            //}
+            if (recorder != null)
+            {
+                recorder.Stop();
+                recorder = null;
+            }
 
             if (kinectRuntime != null)
             {

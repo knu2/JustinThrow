@@ -36,9 +36,20 @@ namespace JustinThrow
 
         void OnGestureDetected(string gesture)
         {
-            //int pos = detectedGestures.Items.Add(string.Format("{0} : {1}", gesture, DateTime.Now));
+            int pos = detectedGestures.Items.Add(string.Format("{0} : {1}", gesture, DateTime.Now));
 
-            //detectedGestures.SelectedIndex = pos;
+            switch (gesture)
+            {
+                case "SwipeToLeft":
+                case "Circle":
+                    this.CommandBindings[0].Command.Execute("2");
+                    break;
+                case "SwipeToRight":
+                    this.CommandBindings[0].Command.Execute("1");
+                    break;
+            }
+            
+            detectedGestures.SelectedIndex = pos;
         }
 
         void CloseGestureDetector()
